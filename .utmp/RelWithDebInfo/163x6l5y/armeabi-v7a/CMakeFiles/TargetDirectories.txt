@@ -1,0 +1,5 @@
+E:/Unity Projects/Wordle Offline Games/.utmp/RelWithDebInfo/163x6l5y/armeabi-v7a/CMakeFiles/edit_cache.dir
+E:/Unity Projects/Wordle Offline Games/.utmp/RelWithDebInfo/163x6l5y/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+E:/Unity Projects/Wordle Offline Games/.utmp/RelWithDebInfo/163x6l5y/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
+E:/Unity Projects/Wordle Offline Games/.utmp/RelWithDebInfo/163x6l5y/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
+E:/Unity Projects/Wordle Offline Games/.utmp/RelWithDebInfo/163x6l5y/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir

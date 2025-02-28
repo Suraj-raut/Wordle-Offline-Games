@@ -115,7 +115,21 @@ namespace TMPro.Examples
         }
 
 
-        
+        /*
+        void Update()
+        {
+            if (BenchmarkType == 0)
+            {
+                m_textMeshPro.text = (m_frame % 1000).ToString();            
+            }
+            else if (BenchmarkType == 1)
+            {
+                m_textMesh.text = (m_frame % 1000).ToString();
+            }
+
+            m_frame += 1;
+        }
+        */
     }
 
 }

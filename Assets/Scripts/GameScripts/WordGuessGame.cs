@@ -7,6 +7,7 @@ using System;
 public class WordGuessGame : MonoBehaviour
 {
     [SerializeField] private WordListLoader wordListLoader;
+
     [SerializeField] private KeyboardInputManager _keyboardInputManager;
     [SerializeField] private GridLayoutGroup grid;
     [SerializeField] private ResultPanel resultPanel;
@@ -25,7 +26,7 @@ public class WordGuessGame : MonoBehaviour
 
     void Start()
     {
-        wordListLoader = FindObjectOfType<WordListLoader>();
+        wordListLoader = wordListLoader.GetComponent<WordListLoader>();
         // Ensure the word list is not empty
         GetTargetWord();
          //submitButton.onClick.AddListener(CheckGuess);

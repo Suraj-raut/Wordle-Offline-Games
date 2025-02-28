@@ -10,6 +10,7 @@ namespace AClockworkBerry
 	{
 		public static bool IsPersistent = true;
 
+	//	private static ScreenLogger[] instanceArray;
 		private static ScreenLogger instance;
 		private static bool instantiated = false;
 
@@ -81,7 +82,10 @@ namespace AClockworkBerry
 			{
 				if (instantiated) return instance;
 
-				instance = GameObject.FindObjectOfType(typeof(ScreenLogger)) as ScreenLogger;
+				//instanceArray = GameObject.FindObjectsByType<ScreenLogger>(FindObjectsSortMode.None);
+                //instance = instanceArray[0];
+
+				instance = (ScreenLogger)FindAnyObjectByType(typeof(ScreenLogger));
 
 				// Object not found, we create a new one
 				if (instance == null)
@@ -115,7 +119,7 @@ namespace AClockworkBerry
 
 		public void Awake()
 		{
-			ScreenLogger[] obj = GameObject.FindObjectsOfType<ScreenLogger>();
+			ScreenLogger[] obj = GameObject.FindObjectsByType<ScreenLogger>(FindObjectsSortMode.None);
 
 			if (obj.Length > 1)
 			{

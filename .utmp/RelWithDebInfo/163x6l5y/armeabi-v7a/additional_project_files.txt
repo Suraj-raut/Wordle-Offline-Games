@@ -1,0 +1,1 @@
+E:\Unity Projects\Wordle Offline Games\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\src\main\cpp\FramePacing\UnitySwappyWrapper.h
