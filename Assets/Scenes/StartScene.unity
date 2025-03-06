@@ -3025,7 +3025,7 @@ MonoBehaviour:
   Margin: 20
   AnchorPosition: 1
   FontSize: 20
-  BackgroundOpacity: 0.6
+  BackgroundOpacity: 0.8
   BackgroundColor: {r: 0, g: 0, b: 0, a: 0.5}
   LogMessages: 1
   LogWarnings: 1

@@ -1,0 +1,1 @@
+E:\UnityProjects\Wordle Offline Games\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\1w6g2h4m\obj\armeabi-v7a

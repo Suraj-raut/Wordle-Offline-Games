@@ -11,10 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WordGuess.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/LevelPlay/Samples/UnityLevelPlaySample/Scenes/LevelPlaySample.unity
     guid: bd1eb3e1953724de08fadd7cbbc6d358
   - enabled: 1
     path: Assets/Scenes/MediationTestScene.unity
     guid: 6feed925447f5274b84c9be385472181
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
