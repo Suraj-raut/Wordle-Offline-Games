@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class MediationAdsManager : MonoBehaviour
 {
@@ -12,17 +13,34 @@ public class MediationAdsManager : MonoBehaviour
 #else
     string appKey = "1fb4b222d";
 #endif
-    public TextMeshProUGUI totalCoinsTxt;
+  
+    public bool isRewarded = false;
+    public event Action OnRewardedAdCompleted;
+
+    public static MediationAdsManager Instance {get; private set;}
+
     private void Awake()
     {
-        totalCoinsTxt.text = PlayerPrefs.GetInt("totalCoins").ToString();
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
 
         IronSource.Agent.validateIntegration();
         IronSource.Agent.init(appKey);
-    // }
+        InitializeAds();
+    }
 
-    // private void OnEnable()
-    // {
+    private void InitializeAds()
+    {
+  
         IronSourceEvents.onSdkInitializationCompletedEvent += SdkInitialized;
 
         //Add AdInfo Banner Events
@@ -50,13 +68,25 @@ public class MediationAdsManager : MonoBehaviour
         IronSourceRewardedVideoEvents.onAdShowFailedEvent += RewardedVideoOnAdShowFailedEvent;
         IronSourceRewardedVideoEvents.onAdRewardedEvent += RewardedVideoOnAdRewardedEvent;
         IronSourceRewardedVideoEvents.onAdClickedEvent += RewardedVideoOnAdClickedEvent;
-
-
     }
 
-    void SdkInitialized() {
+    
+
+    void SdkInitialized()
+    {
         print("Sdk in initialized!!");
     }
+
+    public void LoadAdsInitially()
+    {
+        LoadBanner();
+        LoadInterstitial();
+        LoadRewarded();
+        Debug.Log("Loading of ads is finished..");
+
+    }
+
+
     void OnApplicationPause(bool isPaused)
     {
         IronSource.Agent.onApplicationPause(isPaused);
@@ -198,12 +228,10 @@ public class MediationAdsManager : MonoBehaviour
     // When using server-to-server callbacks, you may ignore this event and wait for the ironSource server callback.
     void RewardedVideoOnAdRewardedEvent(IronSourcePlacement placement, IronSourceAdInfo adInfo)
     {
-        int crrCoin = PlayerPrefs.GetInt("totalCoins");
-        crrCoin += 100;
-        PlayerPrefs.SetInt("totalCoins", crrCoin);
-
-        totalCoinsTxt.text = PlayerPrefs.GetInt("totalCoins").ToString();
-        Debug.Log("Reward Granted..");
+             Debug.Log("Rewarded Ads Shown Successfully..Kindly Reward the player");
+             isRewarded = true;
+             OnRewardedAdCompleted?.Invoke();
+             Debug.Log("Reward Granted..");
 
     }
     // The rewarded video ad was failed to show.

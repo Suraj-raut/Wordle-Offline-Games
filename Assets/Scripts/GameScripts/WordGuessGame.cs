@@ -31,7 +31,7 @@ public class WordGuessGame : MonoBehaviour
         GetTargetWord();
          //submitButton.onClick.AddListener(CheckGuess);
 
-        // AdsManager.Instance.bannerAds.ShowBannerAd();
+         MediationAdsManager.Instance.LoadBanner();
     }
     
 
@@ -58,12 +58,12 @@ public class WordGuessGame : MonoBehaviour
     private void OnEnable()
     {
         KeyboardInputManager.OnWordComplete += CheckGuessIsValid;
-       // AdsManager.Instance.rewardedAds.OnRewardedAdCompleted += RewardThePlayer;
+        MediationAdsManager.Instance.OnRewardedAdCompleted += RewardThePlayer;
     }
     private void OnDisable()
     {
          KeyboardInputManager.OnWordComplete -= CheckGuessIsValid;
-       //  AdsManager.Instance.rewardedAds.OnRewardedAdCompleted -= RewardThePlayer;
+         MediationAdsManager.Instance.OnRewardedAdCompleted -= RewardThePlayer;
     }
 
     private void CheckGuessIsValid(string guess)
@@ -166,7 +166,7 @@ public class WordGuessGame : MonoBehaviour
 
         if(gamePlayedCount % 3 == 0)
         {
-            //AdsManager.Instance.interstitialAds.ShowInterstitialAd();
+            MediationAdsManager.Instance.ShowInterstitial();
         }
     }
 
@@ -196,7 +196,7 @@ public class WordGuessGame : MonoBehaviour
     public void OnClickHintButton()
     {
         AudioManager.Instance.PlayPopupOpenSound();
-        //AdsManager.Instance.rewardedAds.ShowRewardedAd();
+        MediationAdsManager.Instance.ShowRewarded();
         
     }
 
@@ -204,31 +204,31 @@ public class WordGuessGame : MonoBehaviour
     {
         bool isRewardGiven = false;
 
-        // if(AdsManager.Instance.rewardedAds.isRewarded)
-        // {
-        //     if(!isRewardGiven)
-        //     {
-        //         foreach (KeyboardButtonController key in allKeys)
-        //         {
-        //             for (int i = 0; i < targetWord.Length; i++)
-        //             {
-        //                 if (targetWord.Contains(key.keyLetter) && !isRewardGiven)
-        //                 {
-        //                     Color color = key.GetTheKeyColor();
+        if(MediationAdsManager.Instance.isRewarded)
+        {
+            if(!isRewardGiven)
+            {
+                foreach (KeyboardButtonController key in allKeys)
+                {
+                    for (int i = 0; i < targetWord.Length; i++)
+                    {
+                        if (targetWord.Contains(key.keyLetter) && !isRewardGiven)
+                        {
+                            Color color = key.GetTheKeyColor();
                             
-        //                     if(color != Color.green && color != Color.yellow)
-        //                     {
-        //                         key.SetContainerFillColor(Color.yellow);
-        //                         isRewardGiven = true;
-        //                         break;
-        //                     }
+                            if(color != Color.green && color != Color.yellow)
+                            {
+                                key.SetContainerFillColor(Color.yellow);
+                                isRewardGiven = true;
+                                break;
+                            }
                         
-        //                 }
-        //             }
-        //         }
-        //     }
+                        }
+                    }
+                }
+            }
 
-        // }
+        }
 
     }
 
