@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "560780216841",
+    "firebase_url": "https://wordle-ac4ca-default-rtdb.firebaseio.com",
+    "project_id": "wordle-ac4ca",
+    "storage_bucket": "wordle-ac4ca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560780216841:android:b1d64ec708670ff14546d8",
+        "android_client_info": {
+          "package_name": "com.CreativeCuriosity.WordleOfflineGames"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP08SMrvmh0i24UlATP0OFueaGBK-EaEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
