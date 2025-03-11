@@ -22,6 +22,7 @@ public class DatabaseManager : MonoBehaviour
     public bool isOnlineModeActive = false;
 
     public static event Action PlayOnSelectLanguage;
+    public event Action OnWordSearched;
 
     private void Awake()
     {
@@ -156,21 +157,29 @@ public class DatabaseManager : MonoBehaviour
         Debug.LogError("Error fetching data: " + task.Exception);
     }
 
-    public void QueryWord(string wordToCheck)
+    public bool isWordPresent = false;
+
+    public void WordPresentInDatabase(string wordToCheck)
     {
+        Debug.Log("Searching in database" + wordToCheck);
          reference.Child(databasePath).OrderByValue().EqualTo(wordToCheck).GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
             {
+                Debug.Log("Task Completed...>>>");
                 DataSnapshot snapshot = task.Result;
 
                 if (snapshot.Exists)
                 {
+                    isWordPresent = true;
                     Debug.Log("Word found: " + wordToCheck);
+                    OnWordSearched?.Invoke();
                 }
                 else
                 {
+                    isWordPresent = false;
                     Debug.Log("Word NOT found.");
+                    OnWordSearched?.Invoke();
                 }
             }
         });

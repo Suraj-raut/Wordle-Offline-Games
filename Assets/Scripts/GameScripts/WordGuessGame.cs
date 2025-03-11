@@ -59,11 +59,13 @@ public class WordGuessGame : MonoBehaviour
     {
         KeyboardInputManager.OnWordComplete += CheckGuessIsValid;
         MediationAdsManager.Instance.OnRewardedAdCompleted += RewardThePlayer;
+        DatabaseManager.Instance.OnWordSearched += IsWordFoundInDatabase;
     }
     private void OnDisable()
     {
-         KeyboardInputManager.OnWordComplete -= CheckGuessIsValid;
-         MediationAdsManager.Instance.OnRewardedAdCompleted -= RewardThePlayer;
+        KeyboardInputManager.OnWordComplete -= CheckGuessIsValid;
+        MediationAdsManager.Instance.OnRewardedAdCompleted -= RewardThePlayer;
+        DatabaseManager.Instance.OnWordSearched -= IsWordFoundInDatabase;
     }
 
     private void CheckGuessIsValid(string guess)
@@ -76,14 +78,36 @@ public class WordGuessGame : MonoBehaviour
         }
         else if(!wordListLoader.wordList.Contains(guess))
         {
-            Debug.Log("Invalid word");
-            submitButton.InvaildWord();
+          
+            if(DatabaseManager.Instance.isOnlineModeActive)
+            {
+                Debug.Log("Game is in online mode--->>");
+
+                DatabaseManager.Instance.WordPresentInDatabase(guess);
+
+            }
+            else
+            {
+                Debug.Log("Invalid word");
+                submitButton.InvaildWord();
+            }
         }
         else
         {
            Debug.Log("Valid word to Sumit");
            submitButton.ValidWord();
         }
+    }
+
+    private void IsWordFoundInDatabase()
+    {
+        bool _isWordPresent = DatabaseManager.Instance.isWordPresent;
+
+         Debug.Log("Game is in online mode--->>>Is word present :-After" + _isWordPresent);
+
+         if(_isWordPresent) { submitButton.ValidWord(); }
+         else { submitButton.InvaildWord(); }
+
     }
 
 
@@ -163,9 +187,10 @@ public class WordGuessGame : MonoBehaviour
         submitButton.InCompleteWord();
         GetTargetWord();
         //AdsManager.Instance.bannerAds.ShowBannerAd();
-
+        Debug.Log("Game Played count :--" + gamePlayedCount);
         if(gamePlayedCount % 3 == 0)
         {
+            Debug.Log("Game Played count :--Show interstitial" + gamePlayedCount);
             MediationAdsManager.Instance.ShowInterstitial();
         }
     }
