@@ -22,7 +22,18 @@ public class KeyboardController : MonoBehaviour
     [SerializeField] GameObject actionCapitalLetters;
     [SerializeField] GameObject actionSmallLetters;
 
+    [SerializeField] GameObject germanSplChars;
+    [SerializeField] GameObject frenchSplChars1;
+    [SerializeField] GameObject frenchSplChars2;
+    [SerializeField] GameObject spanishSplChars;
+    
+
     private bool isSmallLettersShown = true;
+
+    private void Awake()
+    {
+        if(DatabaseManager.Instance.isOnlineModeActive) ShowSpecialCharsForLanguages(DatabaseManager.Instance.DatabasePath);
+    }
 
     public void ShowCapitalLetters() {
         isSmallLettersShown = false;
@@ -120,5 +131,46 @@ public class KeyboardController : MonoBehaviour
 
         splChars1.SetActive(true);
         splChars2.SetActive(true);
+    }
+
+    public void ShowSpecialCharsForLanguages(string language)
+    {
+        if(language == "German")
+        { 
+            germanSplChars.SetActive(true);
+
+            frenchSplChars1.SetActive(false);
+            frenchSplChars2.SetActive(false);
+            spanishSplChars.SetActive(false);
+
+        }
+        else if(language == "French")
+        {
+            germanSplChars.SetActive(false);
+
+            frenchSplChars1.SetActive(true);
+            frenchSplChars2.SetActive(true);
+
+            spanishSplChars.SetActive(false);
+
+        }
+        else if(language == "Spanish")
+        {
+            germanSplChars.SetActive(false);
+            frenchSplChars1.SetActive(false);
+            frenchSplChars2.SetActive(false);
+
+            spanishSplChars.SetActive(true);
+
+        }
+        else
+        {
+            germanSplChars.SetActive(false);
+            frenchSplChars1.SetActive(false);
+            frenchSplChars2.SetActive(false);
+            spanishSplChars.SetActive(false);
+
+        }
+
     }
 }

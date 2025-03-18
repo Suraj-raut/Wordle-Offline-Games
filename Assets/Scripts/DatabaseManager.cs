@@ -10,6 +10,12 @@ using UnityEngine.SceneManagement;
 public class DatabaseManager : MonoBehaviour
 {
     private string databasePath = "English"; // Path to your restructured words node
+    public string DatabasePath
+    {
+        get => databasePath;
+        set => databasePath = value;
+    }
+
     private string wordCountPath = "TotalWordsCount"; //Path to the word count
     private int numWordsToFetch = 100;
     private long totalWordCount = 3646;

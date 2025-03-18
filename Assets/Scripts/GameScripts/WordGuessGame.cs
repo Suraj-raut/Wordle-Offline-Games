@@ -31,14 +31,14 @@ public class WordGuessGame : MonoBehaviour
         GetTargetWord();
          //submitButton.onClick.AddListener(CheckGuess);
 
-         MediationAdsManager.Instance.LoadBanner();
+         MediationAdsManager.Instance.LoadAdsInitially();
     }
     
 
     private string GetRandomWordFromList()
     {
         int index = UnityEngine.Random.Range(0, wordListLoader.wordList.Count);
-        return wordListLoader.wordList[index];
+        return wordListLoader.wordList[index].ToLower();
     }
 
 
