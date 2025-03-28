@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Settings : MonoBehaviour
 {
@@ -11,6 +12,18 @@ public class Settings : MonoBehaviour
     [SerializeField] GameObject soundsOff;
 
     [SerializeField] Slider volumeSlider;
+
+    private void Awake()
+    {
+        if(AudioManager.Instance.isMusicOn) { TurnMusicOn(); }
+        else { TurnMusicOFF(); }
+
+        if(AudioManager.Instance.isClickSoundsOn) { TurnSoundsOn(); }
+        else{ TurnSoundsOFF(); }
+
+       volumeSlider.value = AudioManager.Instance.volumeSliderValue;
+        
+    }
 
     public void OpenSettingsPanel()
     {
@@ -27,6 +40,7 @@ public class Settings : MonoBehaviour
 
     public void TurnMusicOn()
     {
+        AudioManager.Instance.isMusicOn = true;
         AudioManager.Instance.PlayButtonClickSound();
         bgMusicOff.SetActive(false);
         bgMusicOn.SetActive(true);
@@ -36,6 +50,7 @@ public class Settings : MonoBehaviour
 
     public void TurnMusicOFF()
     {
+        AudioManager.Instance.isMusicOn = false;
         AudioManager.Instance.PlayButtonClickSound();
         bgMusicOff.SetActive(true);
         bgMusicOn.SetActive(false);
@@ -45,6 +60,7 @@ public class Settings : MonoBehaviour
 
     public void TurnSoundsOn()
     {
+        AudioManager.Instance.isClickSoundsOn = true;
         AudioManager.Instance.PlayButtonClickSound();
         soundsOff.SetActive(false);
         soundsOn.SetActive(true);
@@ -54,6 +70,7 @@ public class Settings : MonoBehaviour
 
     public void TurnSoundsOFF()
     {
+        AudioManager.Instance.isClickSoundsOn = false;
         AudioManager.Instance.PlayButtonClickSound();
         soundsOff.SetActive(true);
         soundsOn.SetActive(false);

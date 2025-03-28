@@ -2285,6 +2285,9 @@ MonoBehaviour:
   losingSound: {fileID: 1244388530}
   sumbitButtonClicked: {fileID: 2066361117}
   BGSound: {fileID: 295945954}
+  isMusicOn: 1
+  isClickSoundsOn: 1
+  volumeSliderValue: 1
 --- !u!4 &907539060
 Transform:
   m_ObjectHideFlags: 0
@@ -6297,6 +6300,10 @@ PrefabInstance:
     - target: {fileID: 396135252069233608, guid: 331584e85064bd844b874634bb292829, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919081385269547697, guid: 331584e85064bd844b874634bb292829, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5236846439698282454, guid: 331584e85064bd844b874634bb292829, type: 3}
       propertyPath: m_fontSize
