@@ -11,6 +11,7 @@ public class BackButtonFunctionality : MonoBehaviour
         AudioManager.Instance.PlayPopupOpenSound();
         DatabaseManager.Instance.OnlineWordsList.Clear();
         SceneManager.LoadScene("StartScene");
+        MediationAdsManager.Instance.DestroyBanner();
     } 
 
     public void ExitGame()

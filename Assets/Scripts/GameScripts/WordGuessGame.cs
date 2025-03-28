@@ -159,7 +159,7 @@ public class WordGuessGame : MonoBehaviour
             _scoreManger.SaveTheHighScore();
             resultPanel.gameObject.SetActive(true);
             resultPanel.PlayerWon();
-            //AdsManager.Instance.bannerAds.HideBannerAd();
+            MediationAdsManager.Instance.DestroyBanner(); 
             // Handle win condition
         }
         else if (attempts == 6)
@@ -170,7 +170,7 @@ public class WordGuessGame : MonoBehaviour
             _scoreManger.SaveTheHighScore();
             resultPanel.gameObject.SetActive(true);
             resultPanel.PlayerLose(targetWord);
-           // AdsManager.Instance.bannerAds.HideBannerAd();
+            MediationAdsManager.Instance.DestroyBanner();
             // Handle game over
         }
     }
@@ -186,7 +186,7 @@ public class WordGuessGame : MonoBehaviour
         ResetKeyboardKeysColor();
         submitButton.InCompleteWord();
         GetTargetWord();
-        //AdsManager.Instance.bannerAds.ShowBannerAd();
+        MediationAdsManager.Instance.LoadBanner();
         Debug.Log("Game Played count :--" + gamePlayedCount);
         if(gamePlayedCount % 3 == 0)
         {
