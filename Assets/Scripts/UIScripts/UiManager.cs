@@ -107,6 +107,7 @@ public class UiManager : MonoBehaviour
         if(isonline != null)
         {
             DatabaseManager.Instance.isOnlineModeActive = isonline;
+            InternetChecker.Instance.CheckInternetOnlyInOnlineMode();
             if(isonline)
             {
                 AudioManager.Instance.PlayPopupOpenSound();

@@ -1768,6 +1768,7 @@ MonoBehaviour:
   grid: {fileID: 1497200310}
   resultPanel: {fileID: 71506679}
   _scoreManger: {fileID: 658801522}
+  hintButton: {fileID: 48625808}
   submitButton: {fileID: 1701267527}
   allKeys:
   - {fileID: 866316972}
@@ -3279,7 +3280,7 @@ GameObject:
   - component: {fileID: 1062551406}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

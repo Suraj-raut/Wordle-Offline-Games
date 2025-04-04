@@ -13,6 +13,8 @@ public class WordGuessGame : MonoBehaviour
     [SerializeField] private ResultPanel resultPanel;
     [SerializeField] private ScoreManager _scoreManger;
 
+    [SerializeField] private GameObject hintButton;
+
     [SerializeField] private SubmitButtonFunctionality submitButton;
 
    // public static event Action<string> OnWordSumbit;
@@ -31,7 +33,12 @@ public class WordGuessGame : MonoBehaviour
         GetTargetWord();
          //submitButton.onClick.AddListener(CheckGuess);
 
-         MediationAdsManager.Instance.LoadAdsInitially();
+        if(DatabaseManager.Instance.isOnlineModeActive) 
+        {
+            MediationAdsManager.Instance.LoadAdsInitially();
+            hintButton.SetActive(true);
+        }
+        else { hintButton.SetActive(false); }
     }
     
 
@@ -159,7 +166,7 @@ public class WordGuessGame : MonoBehaviour
             _scoreManger.SaveTheHighScore();
             resultPanel.gameObject.SetActive(true);
             resultPanel.PlayerWon();
-            MediationAdsManager.Instance.DestroyBanner(); 
+           if(DatabaseManager.Instance.isOnlineModeActive) { MediationAdsManager.Instance.DestroyBanner(); }
             // Handle win condition
         }
         else if (attempts == 6)
@@ -170,7 +177,7 @@ public class WordGuessGame : MonoBehaviour
             _scoreManger.SaveTheHighScore();
             resultPanel.gameObject.SetActive(true);
             resultPanel.PlayerLose(targetWord);
-            MediationAdsManager.Instance.DestroyBanner();
+           if(DatabaseManager.Instance.isOnlineModeActive) { MediationAdsManager.Instance.DestroyBanner(); }
             // Handle game over
         }
     }
@@ -186,13 +193,16 @@ public class WordGuessGame : MonoBehaviour
         ResetKeyboardKeysColor();
         submitButton.InCompleteWord();
         GetTargetWord();
-        MediationAdsManager.Instance.LoadBanner();
-        Debug.Log("Game Played count :--" + gamePlayedCount);
-        if(gamePlayedCount % 3 == 0)
-        {
-            Debug.Log("Game Played count :--Show interstitial" + gamePlayedCount);
-            MediationAdsManager.Instance.ShowInterstitial();
-        }
+       if(DatabaseManager.Instance.isOnlineModeActive)
+       {
+            MediationAdsManager.Instance.LoadBanner();
+            Debug.Log("Game Played count :--" + gamePlayedCount);
+            if(gamePlayedCount % 3 == 0)
+            {
+                Debug.Log("Game Played count :--Show interstitial" + gamePlayedCount);
+                MediationAdsManager.Instance.ShowInterstitial();
+            }
+       }
     }
 
     public void ChangeKeyColor(string keyLetter, Color newColor)
@@ -221,7 +231,7 @@ public class WordGuessGame : MonoBehaviour
     public void OnClickHintButton()
     {
         AudioManager.Instance.PlayPopupOpenSound();
-        MediationAdsManager.Instance.ShowRewarded();
+       if(DatabaseManager.Instance.isOnlineModeActive) {  MediationAdsManager.Instance.ShowRewarded(); }
         
     }
 
