@@ -5,11 +5,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System;
 
 public class InternetChecker : MonoBehaviour
 {
     public static InternetChecker Instance;
     private GameObject noInternetPopup;
+    private bool isInternetAvailable = false;
     
 
     void Awake()
@@ -38,7 +40,7 @@ public class InternetChecker : MonoBehaviour
         }
     }
 
-    public void CheckInternetConnection()
+    public void CheckInternetConnection(Action<bool> callback = null)
     {
         if(noInternetPopup == null)
         {
@@ -50,12 +52,13 @@ public class InternetChecker : MonoBehaviour
         if (Application.internetReachability == NetworkReachability.NotReachable)  // Check Connected to Wifi or Mobile Network
         {
             Debug.Log("No Internet Connection");
-             noInternetPopup.SetActive(true);
+            noInternetPopup.SetActive(true);
+            isInternetAvailable = false;
         }
         else
         {
             Debug.Log("Internet is Available");
-
+             isInternetAvailable = true;
             // Check if connected to firebase
             FirebaseDatabase.DefaultInstance.GetReference(".info/connected").GetValueAsync().ContinueWithOnMainThread(task =>
             {
@@ -64,16 +67,19 @@ public class InternetChecker : MonoBehaviour
                     Debug.Log("Connected to Firebase");
                     noInternetPopup.SetActive(false);
                    // internetPopup.SetActive(false);
+                    isInternetAvailable = true;
                 }
                 else
                 {
                     Debug.Log("Disconnected from Firebase");
                      noInternetPopup.SetActive(true);
+                     isInternetAvailable = false;
                  //   internetPopup.SetActive(true);
                  //   Time.timeScale = 0; // Pause the game
                 }
             });
 
+           if(callback != null){ callback?.Invoke(isInternetAvailable); }
 
         }
     }
@@ -82,9 +88,11 @@ public class InternetChecker : MonoBehaviour
     {
         if(noInternetPopup.activeInHierarchy)
         {
-            CheckInternetConnection();
+            Debug.Log("OnClick Try Again..");
+            CheckInternetOnlyInOnlineMode();
         }
 
     }
+
 
 }

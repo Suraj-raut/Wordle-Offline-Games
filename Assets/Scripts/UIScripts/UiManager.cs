@@ -110,8 +110,17 @@ public class UiManager : MonoBehaviour
             InternetChecker.Instance.CheckInternetOnlyInOnlineMode();
             if(isonline)
             {
-                AudioManager.Instance.PlayPopupOpenSound();
-                selectLanguagePanel.SetActive(true);
+                InternetChecker.Instance.CheckInternetConnection((bool success) => {
+                    if (success)
+                    {
+                    Debug.Log("Operation succeeded! --> Online");
+                        AudioManager.Instance.PlayPopupOpenSound();
+                        selectLanguagePanel.SetActive(true);
+                    }
+                    else
+                        Debug.Log("Operation failed--> Offline.");
+                });
+                
             }
             else
             {
