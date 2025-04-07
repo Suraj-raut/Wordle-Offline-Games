@@ -8,16 +8,17 @@ public class BackButtonFunctionality : MonoBehaviour
  
      public void OnClickBackButton()
     {
-        AudioManager.Instance.PlayPopupOpenSound();
-        DatabaseManager.Instance.isOnlineModeActive = false;
+        AudioManager.Instance.PlayButtonClickSound();
+        if(DatabaseManager.Instance.isOnlineModeActive){  MediationAdsManager.Instance.DestroyBanner(); }
         DatabaseManager.Instance.OnlineWordsList.Clear();
+        DatabaseManager.Instance.isOnlineModeActive = false;
         SceneManager.LoadScene("StartScene");
-       if(DatabaseManager.Instance.isOnlineModeActive){  MediationAdsManager.Instance.DestroyBanner(); }
+       
     } 
 
     public void ExitGame()
     {
-         AudioManager.Instance.PlayPopupOpenSound();
+         AudioManager.Instance.PlayButtonClickSound();
          Application.Quit();
     }
 }

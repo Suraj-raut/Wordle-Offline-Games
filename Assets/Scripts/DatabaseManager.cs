@@ -66,13 +66,11 @@ public class DatabaseManager : MonoBehaviour
 
     private void EnterOnlineGameMode()
     {
-        AudioManager.Instance.PlayPopupOpenSound();
         SceneManager.LoadScene("WordGuess");
     }
 
     public void OnSelectLanguage(string databaseNode)    
     {
-        AudioManager.Instance.PlayPopupOpenSound();
 
         if(databaseNode != null) { databasePath = databaseNode; }  
 

@@ -56,7 +56,7 @@ public class UiManager : MonoBehaviour
 
     public void OnClickPlayButton()
     {
-        AudioManager.Instance.PlayPopupOpenSound();
+        AudioManager.Instance.PlayButtonClickSound();
         SceneManager.LoadScene("WordGuess");
     }  
 
@@ -76,6 +76,7 @@ public class UiManager : MonoBehaviour
     {
         if(databasePath != null) 
         {
+            AudioManager.Instance.PlayButtonClickSound();
             DatabaseManager.Instance.OnSelectLanguage(databasePath);
             MakeTickMarkON(databasePath);
             isDownloading = true;
@@ -132,7 +133,7 @@ public class UiManager : MonoBehaviour
 
     public void OpenOnlineOfflineSelectionPanel()
     {
-         AudioManager.Instance.PlayButtonClickSound();
+         AudioManager.Instance.PlayPopupOpenSound();
          online_offline_SelectionPanel.SetActive(true);
     }
 

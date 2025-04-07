@@ -43,7 +43,7 @@ public class NoInternetPopupScript : MonoBehaviour
 
     public void BackToHomeScene()
     {
-        AudioManager.Instance.PlayPopupOpenSound();
+        AudioManager.Instance.PlayButtonClickSound();
         DatabaseManager.Instance.isOnlineModeActive = false;
         DatabaseManager.Instance.OnlineWordsList.Clear();
         SceneManager.LoadScene("StartScene");

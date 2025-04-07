@@ -58,7 +58,7 @@ public class InternetChecker : MonoBehaviour
         else
         {
             Debug.Log("Internet is Available");
-             isInternetAvailable = true;
+            // isInternetAvailable = true;
             // Check if connected to firebase
             FirebaseDatabase.DefaultInstance.GetReference(".info/connected").GetValueAsync().ContinueWithOnMainThread(task =>
             {
@@ -77,9 +77,11 @@ public class InternetChecker : MonoBehaviour
                  //   internetPopup.SetActive(true);
                  //   Time.timeScale = 0; // Pause the game
                 }
+
+                if(callback != null){ callback?.Invoke(isInternetAvailable); }
             });
 
-           if(callback != null){ callback?.Invoke(isInternetAvailable); }
+           
 
         }
     }
@@ -88,6 +90,7 @@ public class InternetChecker : MonoBehaviour
     {
         if(noInternetPopup.activeInHierarchy)
         {
+            AudioManager.Instance.PlayButtonClickSound();
             Debug.Log("OnClick Try Again..");
             CheckInternetOnlyInOnlineMode();
         }
